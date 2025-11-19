@@ -217,10 +217,3 @@ If you use Google Gemini, set `GEMINI_API_KEY` instead and ensure your backend r
 - ML-based recommendation model
 
 ---
-
-If you'd like, I can also:
-
-- Add a CONTRIBUTING section
-- Add a local AI mock so the frontend can be tested without a key
-- Improve frontend error messages to show more details
-
