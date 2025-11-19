@@ -1,186 +1,226 @@
-# Job_Portal
+# 🚀 Job Recommendation Platform (AI-Enhanced)
 
-Jobsupi is a MERN-style job/learning assistant web app with optional AI role-suggestion features (Google Gemini / Generative AI). This repository contains a backend (Express + MongoDB) and a frontend (React).
+A modern job-matching web application where users can:
 
----
+- Build their profile
+- Get AI-powered job role suggestions
+- Browse jobs
+- View job details
+- Manage everything with a clean dashboard UI
 
-## Contents
-
-- `Backend/` — Express API, MongoDB models, AI routes
-- `frontend/` — React frontend app
-
----
-
-## Features
-
-- Role and job CRUD endpoints (MongoDB)
-- AI-powered role suggestions and chat-like helper endpoints (optional, uses Google Generative API / Gemini)
-- Frontend UI pages for roles, jobs, profile, and AI suggestions
+The platform is built using React + Node.js + MongoDB + an AI backend (OpenAI/Gemini or any LLM).
 
 ---
 
-## Prerequisites
+## 📌 Features
 
-- Node.js (v16+ recommended)
-- npm
-- MongoDB running locally or a MongoDB URI
-- (Optional) Google Generative AI / Gemini API key if you want live AI suggestions
+✅ Profile Builder
+
+Users can enter:
+
+- Name
+- Phone
+- Skills (comma-separated)
+- Interests (comma-separated)
+- Preferred location
+- Minimum salary
+
+The system saves this profile to the backend.
+
+🤖 AI Role Suggestion
+
+After saving, the backend generates:
+
+- Suggested roles
+- AI reasoning
+
+Suggestions are displayed inside the Dashboard. If AI fails, an alert is shown: "AI failed. Please try again later."
+
+📊 Dashboard
+
+Includes:
+
+- Profile summary
+- Recommended AI job roles
+- Job listings grid
+- Job details panel
+
+💼 Job Listing System
+
+Jobs are displayed in a responsive grid with:
+
+- Card layout
+- Shadows
+- Clean typography
+
+🎨 UI Styling
+
+Completely custom CSS with:
+
+- Glass effect cards
+- Spaced grids
+- Smooth focus states
+- Fully responsive design
 
 ---
 
-## Environment
+## 🗂 Folder Structure (recommended)
 
-Create a `.env` file inside the `Backend/` folder (there is a sample `.env` in the repo). Important env vars used by the backend:
+client
+ ├── src
+ │   ├── components/
+ │   ├── pages/
+ │   ├── styles/
+ │   │    ├── auth.css
+ │   │    ├── dashboard.css
+ │   │    ├── jobs.css
+ │   │    ├── jobDetails.css
+ │   │    └── globals.css
+ │   ├── App.jsx
+ │   └── main.jsx
+ └── README.md
 
-- `PORT` — port the backend runs on (default 5000)
-- `MONGO_URI` — your MongoDB connection string (e.g. `mongodb://127.0.0.1:27017/jobsupi`)
-- `GEMINI_API_KEY` — (optional) API key for Google's Generative API (used by AI endpoints)
+server
+ ├── routes/
+ ├── controllers/
+ ├── models/
+ ├── config.js
+ ├── index.js
+ └── package.json
 
-Example `Backend/.env`:
+---
 
+## ⚙️ Tech Stack
+
+Frontend
+
+- React
+- Axios
+- Custom CSS (no frameworks)
+- React Router
+
+Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- OpenAI API / any LLM
+
+---
+
+## 🛠 API Endpoints (summary)
+
+POST /api/profile
+
+Save/update user profile
+Request example:
+
+```json
+{
+  "name": "Arpita",
+  "phone": "9999999999",
+  "skills": ["riding", "delivery"],
+  "interests": ["delivery"],
+  "location": "Delhi",
+  "minSalary": 15000
+}
 ```
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/jobsupi
-GEMINI_API_KEY=your_api_key_here
+
+POST /api/ai/suggestions
+
+Generates job role suggestions
+Response example:
+
+```json
+{
+  "roles": ["Delivery Rider", "Warehouse Associate"],
+  "reason": "User's skills match operational and mobility tasks."
+}
 ```
 
-Notes:
-- The backend reads env variables using `dotenv` (in `server.js`).
-- The AI controller expects `GEMINI_API_KEY` (the code was updated to use this name).
+If something fails, the frontend shows: "AI failed".
 
 ---
 
-## Install dependencies
+## 📐 UI Styling Notes
 
-Open two terminals (one for backend, one for frontend):
+Profile Page
 
-Backend:
+Two-column aligned form using CSS Grid + nth-child selectors.
 
-```powershell
-cd C:\MERN\PROJECTS\Jobsupi\Backend
-npm install
-```
+Dashboard
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+}
+
+Job Cards
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+Job Details
+
+Simple clean white card with soft shadow.
+
+---
+
+## ▶️ Running the Project
+
+Install dependencies
 
 Frontend:
 
 ```powershell
-cd C:\MERN\PROJECTS\Jobsupi\frontend
+cd client
 npm install
+npm run dev
 ```
 
----
-
-## Run the app (development)
-
-Start MongoDB (if using a local instance).
-
-Start the backend:
+Backend:
 
 ```powershell
-cd C:\MERN\PROJECTS\Jobsupi\Backend
-# If port 5000 is already used, stop that process (see Troubleshooting below)
-npm run dev   # uses nodemon if installed, or `npm start` to run once
-```
-
-Start the frontend:
-
-```powershell
-cd C:\MERN\PROJECTS\Jobsupi\frontend
+cd server
+npm install
 npm start
 ```
 
-Frontend expects the backend API at `http://localhost:5000/api` (configured in `frontend/src/api.js`).
+> Note: In your workspace the folders may be named `frontend/` and `Backend/`. Adjust paths accordingly (e.g. `cd frontend` or `cd Backend`).
 
 ---
 
-## Important API endpoints
+## 🧪 Environment Variables
 
-- GET  /api/roles — list roles
-- POST /api/ai/suggest — AI role suggestions (expects a profile object in request body)
-- POST /api/ai/match — alternate AI/matching endpoint
-- POST /api/ai/chat — general chat / job search helper endpoint
+Create a `.env` file inside `server/` (or `Backend/`) with:
 
-Example profile payload (POST /api/ai/suggest):
-
-```json
-{
-  "name": "Name",
-  "skills": ["javascript", "react"],
-  "interests": ["web"],
-  "location": "City",
-  "salaryPreference": "30k-50k"
-}
+```
+MONGO_URI=your_mongo_url
+OPENAI_API_KEY=your_key
+PORT=5000
 ```
 
----
-
-## Testing the AI suggestions endpoint (PowerShell)
-
-If the backend is running on port 5000 you can test with PowerShell:
-
-```powershell
-Invoke-RestMethod -Uri 'http://localhost:5000/api/ai/suggest' -Method Post \
-  -Body (ConvertTo-Json @{ name = 'Test User'; skills = @('javascript','react'); interests = @('web'); location='Delhi'; salaryPreference='30k-50k' }) \
-  -ContentType 'application/json' | ConvertTo-Json -Depth 5
-```
-
-- If you see a `Gemini key missing` message, confirm `Backend/.env` contains `GEMINI_API_KEY` and that the server was started after adding the `.env`.
-- If you don't want to call the real AI service, the backend `aiRoutes.js` includes fallback logic for role matching when the generative key is absent.
+If you use Google Gemini, set `GEMINI_API_KEY` instead and ensure your backend reads that variable.
 
 ---
 
-## Troubleshooting
+## 🎉 Future Improvements
 
-- Error: `listen EADDRINUSE: address already in use :::5000`
-  - Port 5000 is already used. Find and kill the process in PowerShell:
-
-```powershell
-netstat -ano | findstr :5000
-# note the PID, then:
-taskkill /PID <pid> /F
-```
-
-- `.env` not loaded / GEMINI key missing
-  - Ensure `.env` is in the `Backend/` folder, and that `server.js` loads `dotenv` (this project calls `require('dotenv').config()` in `server.js`).
-
-- Frontend shows "AI failed"
-  - Check backend logs where the AI controller logs errors (search for messages like `❌` or `📥 Gemini Response`). The frontend currently posts to `/api/ai/suggest` (see `frontend/src/pages/RoleSuggestions.jsx`).
-
----
-
-## Development notes and next steps
-
-- The AI integration uses Google Generative API (Gemini). If you plan to use it, secure your key and be mindful of request costs and quotas.
-- There is a simple fallback matching function in `Backend/routes/aiRoutes.js` which will return DB-driven suggestions if the AI key or endpoint isn't present.
-- Consider adding: more robust error messages to frontend, environment-specific configs, and unit/integration tests for the AI endpoints.
-
----
-
-## Useful commands
-
-From repo root:
-
-```powershell
-# Seed the DB (backend folder)
-cd Backend; npm run seed
-
-# Start backend
-cd Backend; npm run dev
-
-# Start frontend
-cd frontend; npm start
-```
-
----
-
-## License
-
-MIT
+- User authentication
+- Resume upload + AI resume scoring
+- Job scraper integration
+- Notifications system
+- ML-based recommendation model
 
 ---
 
 If you'd like, I can also:
-- Add a short CONTRIBUTING section
-- Add a simple local mock for AI responses so you can test frontend without a live key
-- Improve error reporting in the frontend when AI calls fail
+
+- Add a CONTRIBUTING section
+- Add a local AI mock so the frontend can be tested without a key
+- Improve frontend error messages to show more details
 
