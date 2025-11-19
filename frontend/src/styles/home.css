@@ -1,0 +1,23 @@
+/* home.css */
+.hero{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+  align-items:center;
+  margin-top: 24px;
+}
+.hero-card{
+  background: linear-gradient(180deg, rgba(13,71,161,0.08), rgba(13,71,161,0.03));
+  padding: 28px;
+  border-radius: 12px;
+}
+.hero-illustration{
+  background: linear-gradient(180deg,#fff,#f0f4ff);
+  height:220px;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(16,24,40,0.06);
+}
+@media(max-width:900px){
+  .hero{ grid-template-columns: 1fr; }
+  .hero-illustration{ display:none; }
+}

@@ -1,0 +1,13 @@
+/* jobs.css */
+.job-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+}
+.job-card{
+  background:white;
+  padding:16px;
+  border-radius:10px;
+  box-shadow:0 8px 24px rgba(11,18,30,0.04);
+}
+.job-card h3{ margin:0 0 8px 0; }

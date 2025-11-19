@@ -1,0 +1,4 @@
+/* dashboard.css */
+@media(min-width:900px){
+  .dashboard-grid{ display:grid; grid-template-columns: 1fr 360px; gap:18px; }
+}

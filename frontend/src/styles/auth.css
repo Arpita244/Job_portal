@@ -1,0 +1,11 @@
+/* auth.css */
+.auth-card{
+  background:white;
+  max-width:720px;
+  margin: 12px auto;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 8px 24px rgba(11,18,30,0.04);
+}
+.auth-card form{ display:flex; flex-direction:column; gap:12px; }
+.auth-card input{ padding:10px; border-radius:8px; border:1px solid #e6eef8; }
