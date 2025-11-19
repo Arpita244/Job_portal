@@ -1,4 +1,4 @@
-# Jobsupi
+# Job_Portal
 
 Jobsupi is a MERN-style job/learning assistant web app with optional AI role-suggestion features (Google Gemini / Generative AI). This repository contains a backend (Express + MongoDB) and a frontend (React).
 
