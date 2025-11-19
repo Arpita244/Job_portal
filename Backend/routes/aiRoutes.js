@@ -3,8 +3,10 @@ const express = require("express");
 const axios = require("axios");
 const Role = require("../models/Role");
 const Job = require("../models/Job"); // optional DB lookup for jobs
+const { getAISuggestions } = require("../controllers/roleSuggestionController");
 
 const router = express.Router();
+router.post("/suggest", getAISuggestions);
 
 /* ---------- fallbackMatchRoles (unchanged) ---------- */
 function fallbackMatchRoles(profile) {

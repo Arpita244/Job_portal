@@ -1,49 +1,62 @@
-// src/pages/RoleSuggestions.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import api from "../api";
-import RoleCard from "../components/RoleCard";
+import "../styles/auth.css";
 
 export default function RoleSuggestions() {
-  const [profileText, setProfileText] = useState("");
-  const [matches, setMatches] = useState([]);
+  const location = useLocation();
+  const [profile, setProfile] = useState(location.state?.profile || null);
+  const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchMatches = async () => {
-    let profile = {};
-    try {
-      profile = JSON.parse(profileText);
-    } catch {
-      alert("Paste JSON profile (from profile creation) or enter {}");
-      return;
-    }
+  const fetchAI = async () => {
+    if (!profile) return;
     setLoading(true);
     try {
-      const res = await api.post("/ai/match", profile);
-      if (res.data && res.data.matches) setMatches(res.data.matches);
-      else if (res.data && res.data.from && res.data.matches) setMatches(res.data.matches);
-      else setMatches(res.data || []);
+      const res = await api.post("/ai/suggest", profile);
+      setSuggestions(res.data.suggestions || []);
     } catch (e) {
-      alert("Failed to get matches");
-    } finally {
-      setLoading(false);
+      alert("AI failed");
     }
+    setLoading(false);
   };
 
-  return (
-    <div>
-      <h2>AI Role Suggestions</h2>
-      <p>Paste the saved profile JSON (from backend response) or leave blank to use fallback DB roles.</p>
-      <textarea placeholder='{"skills":["riding"], "interests":["delivery"]}' rows={6} value={profileText} onChange={e=>setProfileText(e.target.value)} style={{ width: "100%" }} />
-      <div style={{ marginTop: 12 }}>
-        <button className="btn" onClick={fetchMatches} disabled={loading}>{loading ? "Working..." : "Get Suggestions"}</button>
-      </div>
+  useEffect(() => {
+    fetchAI();
+  }, []);
 
-      <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 12 }}>
-        {matches.map((m, i) => (
-          <div key={i} style={{ background: "white", padding: 12, borderRadius: 8 }}>
-            <h3 style={{ margin: 0 }}>{m.role}</h3>
-            <p className="muted">{m.description || m.reason}</p>
-            <p>Score: {m.score}</p>
+  return (
+    <div className="auth-card">
+      <h2>AI Role Suggestions</h2>
+
+      {profile && (
+        <div className="saved-profile">
+          <p><b>Name:</b> {profile.name}</p>
+          <p><b>Skills:</b> {profile.skills?.join(", ")}</p>
+          <p><b>Interests:</b> {profile.interests?.join(", ")}</p>
+          <p><b>Location:</b> {profile.location}</p>
+          <p><b>Salary Preference:</b> {profile.salaryPreference}</p>
+        </div>
+      )}
+
+      <button className="btn" onClick={fetchAI} disabled={loading}>
+        {loading ? "Getting AI Suggestions..." : "Get Suggestions"}
+      </button>
+
+      <div style={{ marginTop: "20px" }}>
+        {suggestions.map((s, i) => (
+          <div key={i} className="result-card">
+            <h3>{s.title}</h3>
+            <p>{s.why_match}</p>
+            <p><b>Score:</b> {s.score}</p>
+            <p><b>Apply:</b></p>
+            <ul>
+              {s.apply_links.map((l, j) => (
+                <li key={j}>
+                  <a href={l.url} target="_blank" rel="noreferrer">{l.site}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
