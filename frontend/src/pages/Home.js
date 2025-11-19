@@ -13,6 +13,7 @@ const Home = () => {
 
         <div className="home-buttons">
           <Link to="/jobs" className="btn-primary">Browse Jobs</Link>
+          <br/>
           <Link to="/login" className="btn-secondary">Login</Link>
         </div>
       </div>

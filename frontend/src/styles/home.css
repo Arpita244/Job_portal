@@ -1,23 +1,94 @@
-/* home.css */
-.hero{
-  display:grid;
+/* ===========================
+      HERO SECTION
+=========================== */
+
+.hero {
+  display: grid;
   grid-template-columns: 1fr 420px;
-  gap: 24px;
-  align-items:center;
-  margin-top: 24px;
+  gap: 32px;
+  align-items: center;
+  margin-top: 40px;
+  padding: 10px;
+  animation: fadeIn 0.5s ease;
 }
-.hero-card{
-  background: linear-gradient(180deg, rgba(13,71,161,0.08), rgba(13,71,161,0.03));
-  padding: 28px;
-  border-radius: 12px;
+
+/* Main hero content card */
+.hero-card {
+  background: linear-gradient(180deg, rgba(13, 71, 161, 0.12), rgba(13, 71, 161, 0.05));
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(13, 71, 161, 0.08);
+  transition: 0.25s ease-in-out;
 }
-.hero-illustration{
-  background: linear-gradient(180deg,#fff,#f0f4ff);
-  height:220px;
-  border-radius:12px;
-  box-shadow:0 6px 20px rgba(16,24,40,0.06);
+
+.hero-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(13, 71, 161, 0.12);
 }
-@media(max-width:900px){
-  .hero{ grid-template-columns: 1fr; }
-  .hero-illustration{ display:none; }
+
+/* Right-side illustration card */
+.hero-illustration {
+  background: linear-gradient(180deg, #ffffff, #eef3ff);
+  height: 260px;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(16, 24, 40, 0.08);
+  position: relative;
+  overflow: hidden;
+  animation: floatUp 4s ease-in-out infinite;
+}
+
+/* Subtle decorative blur circle */
+.hero-illustration::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(25, 118, 210, 0.15);
+  filter: blur(60px);
+  border-radius: 50%;
+  bottom: -40px;
+  right: -20px;
+}
+
+/* ===========================
+      RESPONSIVE DESIGN
+=========================== */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+  }
+
+  .hero-illustration {
+    display: none;
+  }
+
+  .hero-card {
+    padding: 26px;
+  }
+}
+
+/* ===========================
+      ANIMATIONS
+=========================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }

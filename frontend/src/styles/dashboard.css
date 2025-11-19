@@ -1,4 +1,82 @@
-/* dashboard.css */
-@media(min-width:900px){
-  .dashboard-grid{ display:grid; grid-template-columns: 1fr 360px; gap:18px; }
+/* =======================
+   Dashboard Layout
+======================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 10px;
+}
+
+/* Larger screens */
+@media (min-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    padding: 20px;
+  }
+}
+
+/* =======================
+   Dashboard Cards
+======================= */
+
+.dashboard-card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transition: 0.25s ease-in-out;
+  animation: fadeIn 0.4s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+}
+
+/* =======================
+   Titles
+======================= */
+.dashboard-card h3 {
+  margin-top: 0;
+  color: #072146;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* =======================
+   Lists inside dashboard
+======================= */
+.dashboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e8eef6;
+  color: #0b1220;
+}
+
+.dashboard-list li:last-child {
+  border-bottom: none;
+}
+
+/* =======================
+   Simple fade-in animation
+======================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

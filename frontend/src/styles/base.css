@@ -1,42 +1,97 @@
-/* base.css */
-:root{
+/* =======================
+   Global Variables
+======================= */
+:root {
   --accent:#0d47a1;
+  --accent-light:#1976d2;
   --muted:#6b7280;
   --card-bg:#ffffff;
-  --bg:#f7f9fc;
+  --bg:#f4f7ff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-*{box-sizing:border-box}
-body{
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial;
-  margin:0;
-  background:var(--bg);
-  color:#0b1220;
-  -webkit-font-smoothing:antialiased;
-}
-main { padding-bottom: 60px; }
-h1,h2,h3{ color:#072146 }
-.muted{ color:var(--muted) }
 
-/* buttons */
-.btn{
-  background:var(--accent);
-  color:white;
-  border:none;
-  padding:10px 16px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600;
+/* =======================
+   Global Resets
+======================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.btn-outline{
-  background:transparent;
-  border:1px solid #c7d2fe;
-  color:var(--accent);
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #0b1220;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  padding-bottom: 70px;
 }
-.btn-small{
-  padding:8px 12px;
-  border-radius:6px;
-  border:none;
-  background:var(--accent);
-  color:white;
-  cursor:pointer;
+
+main { padding-bottom: 60px; }
+
+h1, h2, h3 {
+  color: #072146;
+  font-weight: 700;
+}
+
+.muted { color: var(--muted); }
+
+/* =======================
+   Buttons (Modern)
+======================= */
+
+.btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: white;
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: var(--shadow);
+  transition: 0.25s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(13, 71, 161, 0.35);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent-light);
+  color: var(--accent-light);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent-light);
+  color: white;
+  box-shadow: 0 8px 22px rgba(13, 71, 161, 0.25);
+}
+
+.btn-small {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.btn-small:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
 }

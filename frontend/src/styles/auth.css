@@ -1,11 +1,52 @@
-/* auth.css */
-.auth-card{
-  background:white;
-  max-width:720px;
-  margin: 12px auto;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 8px 24px rgba(11,18,30,0.04);
+/* ===== AUTH CARD (Login & Signup UI) ===== */
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transition: 0.25s ease;
+  animation: fadeIn 0.3s ease;
 }
-.auth-card form{ display:flex; flex-direction:column; gap:12px; }
-.auth-card input{ padding:10px; border-radius:8px; border:1px solid #e6eef8; }
+
+.auth-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-card input {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #d3dbef;
+  background: #f6f8ff;
+  font-size: 15px;
+  transition: 0.25s ease;
+}
+
+.auth-card input:focus {
+  border-color: #1976d2;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.25);
+  outline: none;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
